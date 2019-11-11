@@ -158,12 +158,12 @@
         let secsec = Math.floor(sec % 60);
         let sec3 = parseInt(59)-Math.floor(sec % 60);
         let min = Math.floor(sec / 60);
-        let min3 = parseInt(time[nowstation]-time[nowstation-1])-Math.floor(sec / 60)-1;
+        let min3 = (parseInt(time[nowstation])-parseInt(time[nowstation-1]))-(parseInt(Math.floor(sec / 60))-parseInt(time[nowstation-1]))-1;
         let hour = Math.floor(min / 60);
         secsec = addZero(secsec);
-        sec3 = addZero(sec3)
+        sec4 = addZero(sec3)
         min2 = addZero(min);
-        min3 = addZero(min3);
+        min4 = addZero(min3);
         hour = addZero(hour);
         if(min+departuretime>=time[nowstation]){
             nowstation+=1
@@ -184,13 +184,14 @@
         section=station[nowstation]+"(JK-"+numbering+")"
         document.getElementById("nowstation").innerHTML=section;
         document.getElementById("nowtime").innerHTML=""+hour+":"+min2+":"+secsec+"."+point2;
-        document.getElementById("sectiontime").innerHTML=""+hour+":"+min3+":"+sec3+"."+point3;
+        document.getElementById("sectiontime").innerHTML=""+hour+":"+min4+":"+sec4+"."+point3;
         if(min>=alltime){
             clearInterval(stationtimer);
+            alert("終了です。")
         }
     }
     var addZero = function (value) {
-        if (value < 10) {
+        if (value < 10 && value > -1) {
             value = '0' + value;
         }
         return value;
