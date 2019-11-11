@@ -20,7 +20,6 @@
         font-size:300%;
     }
     table{
-        
         margin-left:auto;
         margin-right:auto;
     }
@@ -37,6 +36,20 @@
         left:0;
         color:#F00;
         font-size:300%;
+    }
+    @media all and (max-width: 700px) {
+        #nowstation{
+            font-size:180%;
+        }
+        #study{
+            font-size:150%;
+        }
+        #nowtime{
+            font-size:200%;
+        }
+        td{
+            font-size:100%;
+        }
     }
     </style>
 </head>
@@ -62,7 +75,7 @@
         <tr>
             <td id="relax5"></td><td id="no5">浦和</td><td class="blue" id="time5">10</td>
         </tr> 
-    </table>
+    </table><br>
     <select id="departure" onchange="changestation()">
         <option value="0">大宮</option>
         <option value="5">南浦和</option>
@@ -143,9 +156,9 @@
         let point3 = parseInt(9)-Math.floor(point % 10);
         let sec = Math.floor(diftime / 1000);
         let secsec = Math.floor(sec % 60);
-        let sec3 = parseInt(60)-Math.floor(sec % 60);
+        let sec3 = parseInt(59)-Math.floor(sec % 60);
         let min = Math.floor(sec / 60);
-        let min3 = parseInt(time[nowstation+0]-time[nowstation-1])-Math.floor(sec / 60);
+        let min3 = parseInt(time[nowstation]-time[nowstation-1])-Math.floor(sec / 60)-1;
         let hour = Math.floor(min / 60);
         secsec = addZero(secsec);
         sec3 = addZero(sec3)
