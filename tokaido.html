@@ -161,7 +161,7 @@
     }
     function timermain(){
         let now = new Date();
-        let diftime = (now.getTime() - start.getTime())*60;
+        let diftime = (now.getTime() - start.getTime());
         let point = Math.floor(diftime / 100);
         let point2 = Math.floor(point % 10);
         let point3 = parseInt(9)-Math.floor(point % 10);
