@@ -36,7 +36,7 @@
         border:8px solid #CC2222;
         width:50px;
     }
-    #study{
+    #stud{
         position:absolute;
         top:0;
         left:0;
@@ -48,7 +48,7 @@
         #nowstation{
             font-size:180%;
         }
-        #study{
+        #stud{
             font-size:150%;
         }
         #nowtime{
@@ -63,7 +63,7 @@
 <body>
     <audio id="bell" src="monorail-bell.mp3"></audio>
     <audio id="door" src="train-door1.mp3"></audio>
-    <div id="study">勉強</div>
+    <div id="stud"><span id="study">勉強</span>　<span id="nowtimes">00:00:00</span></div>
     <!--<input type="button" value="1駅休憩" onclick="coffee()">-->
     <h1 id="nowtime">00:00:00</h1>
     <h2><span id="next">次は</span>　<span id="nowstation">品川</span>　です<h2>
@@ -191,6 +191,12 @@
         let minmin = Math.floor(min % 60);
         let min3 = (parseInt(time[nowstation])-parseInt(time[nowstation-1]))-(parseInt(Math.floor(sec / 60))-parseInt(time[nowstation-1]))-1;
         let hour = Math.floor(min / 60);
+        let nowhour = Math.floor(now.getHours());
+        let nowmin = Math.floor(now.getMinutes());
+        let nowsec = Math.floor(now.getSeconds());
+        nowhour = addZero(nowhour);
+        nowmin = addZero(nowmin);
+        nowsec = addZero(nowsec);
         secsec = addZero(secsec);
         sec4 = addZero(sec3)
         min2 = addZero(minmin);
@@ -229,6 +235,7 @@
         section=station[nowstation]///+"(KK-"+numbering+")"
         document.getElementById("nowstation").innerHTML=section;
         document.getElementById("nowtime").innerHTML=""+hour+":"+min2+":"+secsec+"."+point2;
+        document.getElementById("nowtimes").innerHTML=""+nowhour+":"+nowmin+":"+nowsec
         ////document.getElementById("sectiontime").innerHTML=""+hour+":"+min4+":"+sec4+"."+point3;
         if(min>=alltime){
             clearInterval(stationtimer);
