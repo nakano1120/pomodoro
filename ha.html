@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        body{
+            text-align: center;
+            background-color:#6600a8;
+        }
+        h1{
+            text-align: left;
+            display:inline-block;
+            width:280px;
+            height:330px;
+            background-color:#ffff77;
+            font-family: "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN","HG明朝E","ＭＳ Ｐ明朝","ＭＳ 明朝",serif;
+            -ms-writing-mode: tb-rl;
+            writing-mode: vertical-rl;
+            margin:10px;
+            padding-top:50px;
+        }
+        #gure{
+            display:inline-block;
+            width:300px;
+            height:400px;
+            background-color:#66aa66;
+        }
+        .btn-circle-border-simple {
+            display: inline-block;
+            text-decoration: none;
+            color: #668ad8;
+            width: 120px;
+            height: 120px;
+            line-height: 120px;
+            border-radius: 50%;
+            border: solid 2px #668ad8;
+            text-align: center;
+            overflow: hidden;
+            font-weight: bold;
+            transition: .4s;
+        }
+
+        .btn-circle-border-simple:hover {
+            background: #b3e1ff;
+        }
+    </style>
+</head>
+<body>
+    <span id="gure">
+        <h1>
+            <p id="k1">こんにちは</p>
+            <p id="n1">闘魂こめて</p>
+            <p id="s1">歌います</p>
+        </h1>
+    </span>
+    <span id="gure" class="jikan">
+        <h1>
+            <p>{{ message }}</p>
+            <p>{{ message2 }}</p>
+            <p>{{ message3 }}</p>
+        </h1>
+        <input v-model="message"><input v-model="message2"><input v-model="message3">
+    </span>
+    <span id="gure">
+        <h1>
+            <p id="k3">こんにちは</p>
+            <p id="n3">闘魂こめて</p>
+            <p id="s3">歌います</p>
+        </h1>
+    </span><br>
+    <a href="#" onclick="haiku()" class="btn-circle-border-simple">再生成</a><br>
+    <script>
+        var app6 = new Vue({
+            el: '.jikan',
+            data: {
+                message: 'ジャイアンと',
+                message2: 'ジャイアント馬場',
+                message3: 'おおきいな'
+            }
+        })
+        kami=[
+            "つらいです",
+            "駅の前",
+            "帰らなきゃ",
+            "竹やぶの",
+            "ヤッターマン",
+            "ダッカルビ",
+            "いにしえの",
+            "八重桜",
+            "青くても",
+            "唐辛子",
+            "交差点",
+            "大失態",
+            "学生です",
+            "ハイボール",
+            "中毒だ",
+            "踊り食い",
+            "アウトだろ",
+            "平社員",
+            "くじけない",
+            "もらえない",
+            "屯田兵",
+            "おかあさん",
+            "ゆとりでしょ？",
+            "バブルでしょ？",
+            "ノーベル賞",
+            "うちの嫁",
+            "ふなっしー",
+            "宝くじ",
+            "合言葉",
+            "みのもんた",
+            "空気読め！",
+            "気持ち読め！",
+            "もらえます",
+            "脳年齢",
+            "昼食は",
+            "俺ぼっち",
+            "くちぱっち",
+            "デジカメの",
+            "孫に聞く",
+            "聞く上司",
+            "我が家では",
+            "俺バケモン",
+            "痩せてやる",
+            "アカペラで",
+            "気持ち悪い",
+            "歌上手い",
+            "マックかな",
+            "ガキ大将",
+            "やらしいな",
+            "やめてくれ",
+            "これからだ",
+            "塩こうじ",
+            "エグザイル",
+            "皮むけて",
+            "ちょんまげで"
+        ]
+        naka=[
+            "くるしい生活",
+            "新宿西口",
+            "ヨドバシカメラ",
+            "ナイジェリアから",
+            "俺はジャイアン",
+            "確定申告",
+            "ひき肉食べて",
+            "チーズマシマシ",
+            "奈良の都の",
+            "スクランブルで",
+            "本当に君は",
+            "おこった挙句",
+            "24歳",
+            "アル中カラカラ",
+            "ニンニク入れて",
+            "二人羽織で",
+            "私はいつも",
+            "そういうきみは",
+            "資源にできたら",
+            "後ろ姿は",
+            "当てたらやめる",
+            "妻がセレブで",
+            "餌はなんだと",
+            "どこにあるのか",
+            "どこが混むのか",
+            "子供ポケモン",
+            "これ食べてから",
+            "徹子の部屋で",
+            "峠を越えて",
+            "男バージョン",
+            "三歳児かな？",
+            "間接キッスで",
+            "本当の恋は",
+            "コント仕掛けの",
+            "大人になって",
+            "歩いてみたら"
+        ]
+        simo=[
+            "つらいです",
+            "駅の前",
+            "帰らなきゃ",
+            "ヤッターマン",
+            "ダッカルビ",
+            "八重桜",
+            "唐辛子",
+            "交差点",
+            "大失態",
+            "セーフかな",
+            "フィニッシュだ",
+            "学生です",
+            "ハイボール",
+            "中毒だ",
+            "踊り食い",
+            "アウトだろ",
+            "平社員",
+            "くじけない",
+            "もらえない",
+            "屯田兵",
+            "おかあさん",
+            "ノーベル賞",
+            "うちの嫁",
+            "ふなっしー",
+            "宝くじ",
+            "合言葉",
+            "みのもんた",
+            "もらえます",
+            "脳年齢",
+            "俺ぼっち",
+            "くちぱっち",
+            "孫に聞く",
+            "聞く上司",
+            "俺バケモン",
+            "痩せてやる",
+            "アカペラで",
+            "気持ち悪い",
+            "歌上手い",
+            "マックかな",
+            "ガキ大将",
+            "やらしいな",
+            "やめてくれ",
+            "これからだ",
+            "がんばろう",
+            "鈴木拓",
+            "免許取る",
+            "捕まった",
+            "エグザイル"
+        ]
+        function haiku(){
+            document.getElementById("k1").innerHTML=kami[Math.floor(Math.random() * kami.length)]
+            //document.getElementById("k2").innerHTML=kami[Math.floor(Math.random() * kami.length)]
+            document.getElementById("k3").innerHTML=kami[Math.floor(Math.random() * kami.length)]
+            document.getElementById("n1").innerHTML=naka[Math.floor(Math.random() * naka.length)]
+            //document.getElementById("n2").innerHTML=naka[Math.floor(Math.random() * naka.length)]
+            document.getElementById("n3").innerHTML=naka[Math.floor(Math.random() * naka.length)]
+            document.getElementById("s1").innerHTML=simo[Math.floor(Math.random() * simo.length)]
+            //document.getElementById("s2").innerHTML=simo[Math.floor(Math.random() * simo.length)]
+            document.getElementById("s3").innerHTML=simo[Math.floor(Math.random() * simo.length)]
+        }
+        haiku()
+    </script>
+</body>
+</html>
