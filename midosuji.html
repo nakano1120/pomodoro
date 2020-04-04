@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>御堂筋線ポモドーロタイマー</title>
+    <style>
+    body{
+        text-align:center;
+        background-color:#eeeeee;
+    }
+    #studytime{
+        width:50px;
+    }
+    #nowtime{
+        font-size:300%;
+    }
+    .relax{
+        color:#e5171f;
+    }
+    #nowstation{
+        color:#e5171f;
+        padding:10px;
+        background-color:#ffffff;
+        font-size:300%;
+    }
+    table{
+        margin-left:auto;
+        margin-right:auto;
+    }
+    td{
+        font-size:150%;
+    }
+    .blue{
+        border:8px solid #e5171f;
+        width:50px;
+    }
+    #stud{
+        position:absolute;
+        top:0;
+        left:0;
+        color:#F00;
+        font-size:300%;
+        font-weight: bold;
+    }
+    @media all and (max-width: 700px) {
+        #nowstation{
+            font-size:180%;
+        }
+        #stud{
+            font-size:150%;
+        }
+        #nowtime{
+            font-size:200%;
+        }
+        td{
+            font-size:100%;
+        }
+    }
+    </style>
+</head>
+<body>
+    <audio id="bell" src="monorail-bell.mp3"></audio>
+    <audio id="door" src="train-door1.mp3"></audio>
+    <div id="stud"><span id="study">勉強</span>　<span id="nowtimes">00:00:00</span></div>
+    <!--<input type="button" value="1駅休憩" onclick="coffee()">-->
+    <h1 id="nowtime">00:00:00</h1>
+    <h2><span id="next">次は</span>　<span id="nowstation">千里中央</span>　です<h2>
+    <table>
+        <tr>
+            <td id="relax0" class="relax">　</td><td id="no1">桃山台</td><td class="blue" id="time1">3</td>
+        </tr>
+        <tr>
+            <td id="relax1" class="relax">　</td><td id="no2">緑地公園</td><td class="blue" id="time2">5</td>
+        </tr>  
+        <tr>
+            <td id="relax2" class="relax">　</td><td id="no3">江坂</td><td class="blue" id="time3">9</td>
+        </tr>   
+        <tr>
+            <td id="relax3" class="relax">　</td><td id="no4">東三国</td><td class="blue" id="time4">11</td>
+        </tr>  
+        <tr>
+            <td id="relax4" class="relax">　</td><td id="no5">新大阪</td><td class="blue" id="time5">13</td>
+        </tr> 
+    </table><br>
+    <select id="departure" onchange="changestation()">
+        <option value="0">品川</option>
+        <option value="3">青物横丁</option>
+        <option value="7">平和島</option>
+        <option value="10">京急蒲田</option>
+        <option value="13">京急川崎</option>
+        <option value="16">京急鶴見</option>
+        <option value="21">神奈川新町</option>
+        <option value="24">横浜</option>
+        <option value="26">日ノ出町</option>
+        <option value="29">井土ヶ谷</option>
+        <option value="31">上大岡</option>
+        <option value="33">杉田</option>
+        <option value="36">金沢文庫</option>
+        <option value="37">金沢八景</option>
+        <option value="38">追浜</option>
+        <option value="42">汐入</option>
+        <option value="43">横須賀中央</option>
+        <option value="45">堀ノ内</option>
+        <option value="48">浦賀</option>
+    </select>
+    始発
+    <select id="arrival" onchange="changestation()">
+        <option value="0">千里中央</option>
+        <option value="1">桃山台</option>
+        <option value="2">緑地公園</option>
+        <option value="3">江坂</option>
+        <option value="4">東三国</option>
+        <option value="5">新大阪</option>
+        <option value="6">西中島南方</option>
+        <option value="7">中津</option>
+        <option value="8">梅田</option>
+        <option value="9">淀屋橋</option>
+        <option value="10">本町</option>
+        <option value="11">心斎橋</option>
+        <option value="12">なんば</option>
+        <option value="13">大国町</option>
+        <option value="14">動物園前</option>
+        <option value="15">天王寺</option>
+        <option value="16">昭和町</option>
+        <option value="17">西田辺</option>
+        <option value="18">長居</option>
+        <option value="19">あびこ</option>
+        <option value="20">北花田</option>
+        <option value="21">新金岡</option>
+        <option value="22">なかもず</option>
+    </select>
+    行き<br>
+    <br>
+    推定所要時間　<span id="maybetime">0</span>　分
+    勉強区間:<input type="number" id="studytime"  value="2"><br>
+    <h3><a href="index.html">戻る</a></h3>
+    <input type="button" id="startbutton" value="出発" onclick="timer()">
+    <script>
+    const time=[0,3,5,9,11,13,15,17,20,22,24,26,28,30,32,34,37,39,41,43,46,48,52,52,52,52,52,52,52]
+    const between=[]
+    const station=["千里中央","桃山台","緑地公園","江坂","東三国","新大阪","西中島南方","中津","梅田","淀屋橋","本町","心斎橋","なんば","大国町","動物園前","天王寺","昭和町","西田辺","長居","あびこ","北花田","新金岡","なかもず","","","","","",""]
+    let alltime=0
+    let departuretime=0
+    let arrivaltime=0
+    let waittime=0
+    let nowstation=0
+    let section=""
+    let stationtimer
+    let coffeecount=0
+    let relaxstation=""
+    const dep = document.getElementById('departure');
+    const arr = document.getElementById('arrival');
+    const depvalue = 0
+    const arrvalue = 0
+    let stu = 0
+    function timer(){
+        const depindex = dep.selectedIndex;
+        const arrindex = arr.selectedIndex;
+        const depvalue = dep.options[depindex].value;
+        const arrvalue = arr.options[arrindex].value;
+        stu = document.getElementById('studytime').value;
+        console.log(stu)
+        if(stu < 1){
+            alert("勉強区間が不正です")
+            return
+        }
+        start = new Date();
+        departuretime = time[depvalue];
+        arrivaltime = time[arrvalue];
+        console.log(departuretime + " " + arrivaltime)
+        alltime=arrivaltime-departuretime;
+        nowstation=parseInt(depvalue);
+        if(alltime<1){
+            alert("出発地点、到着地点が不正です")
+            return
+        }
+        alert("出発します。")
+        document.getElementById("startbutton").disabled = true;
+        document.getElementById("departure").disabled = true;
+        document.getElementById("arrival").disabled = true;
+        stationtimer = setInterval(timermain, 100);
+    }
+    function timermain(){
+        let now = new Date();
+        let diftime = (now.getTime() - start.getTime());
+        let point = Math.floor(diftime / 100);
+        let point2 = Math.floor(point % 10);
+        let point3 = parseInt(9)-Math.floor(point % 10);
+        let sec = Math.floor(diftime / 1000);
+        let secsec = Math.floor(sec % 60);
+        let sec3 = parseInt(59)-Math.floor(sec % 60);
+        let min = Math.floor(sec / 60);
+        let minmin = Math.floor(min % 60);
+        let min3 = (parseInt(time[nowstation])-parseInt(time[nowstation-1]))-(parseInt(Math.floor(sec / 60))-parseInt(time[nowstation-1]))-1;
+        let hour = Math.floor(min / 60);
+        let nowhour = Math.floor(now.getHours());
+        let nowmin = Math.floor(now.getMinutes());
+        let nowsec = Math.floor(now.getSeconds());
+        nowhour = addZero(nowhour);
+        nowmin = addZero(nowmin);
+        nowsec = addZero(nowsec);
+        secsec = addZero(secsec);
+        sec4 = addZero(sec3)
+        min2 = addZero(minmin);
+        min4 = addZero(min3);
+        hour = addZero(hour);
+        if(min+departuretime>=time[nowstation]){
+            nowstation++
+            coffeecount++
+            console.log("あ"+coffeecount)
+            let b = document.getElementById("bell");
+            let d = document.getElementById("door");
+            b.play();
+            b.addEventListener("ended", function(){
+		        d.play();
+	        }, false);
+            changenext();
+            if(waittime==1){
+                waittime=0;
+                document.getElementById("study").innerHTML="勉強"
+                document.getElementById("study").style.color="#ff0000"
+            }
+            if(coffeecount>stu){
+                coffeecount=0;
+                waittime=1;
+                document.getElementById("study").innerHTML="休憩"
+                document.getElementById("study").style.color="#00B2E5"
+            }
+        }
+        if((min+departuretime)+1>=time[nowstation] && secsec>30){
+            document.getElementById("next").innerHTML="まもなく"
+        }else{
+            document.getElementById("next").innerHTML="次は"
+        }
+        let numbering=47-nowstation
+        numbering=addZero(numbering);
+        section=station[nowstation]///+"(KK-"+numbering+")"
+        document.getElementById("nowstation").innerHTML=section;
+        document.getElementById("nowtime").innerHTML=""+hour+":"+min2+":"+secsec+"."+point2;
+        document.getElementById("nowtimes").innerHTML=""+nowhour+":"+nowmin+":"+nowsec
+        ////document.getElementById("sectiontime").innerHTML=""+hour+":"+min4+":"+sec4+"."+point3;
+        if(min>=alltime){
+            clearInterval(stationtimer);
+            alert("終了です。")
+        }
+    }
+    function addZero(value) {
+        if (value < 10 && value > -1) {
+            value = '0' + value;
+        }
+        return value;
+    }
+    function changestation(){
+        const depindex = dep.selectedIndex;
+        const arrindex = arr.selectedIndex;
+        const depvalue = dep.options[depindex].value;
+        const arrvalue = arr.options[arrindex].value;
+        departuretime = time[depvalue];
+        arrivaltime = time[arrvalue];
+        let maybetime=arrivaltime-departuretime
+        document.getElementById("maybetime").innerHTML=maybetime
+    }
+    function changenext(){
+        document.getElementById("no1").innerHTML=station[nowstation+0]
+        document.getElementById("no2").innerHTML=station[nowstation+1]
+        document.getElementById("no3").innerHTML=station[nowstation+2]
+        document.getElementById("no4").innerHTML=station[nowstation+3]
+        document.getElementById("no5").innerHTML=station[nowstation+4]
+        document.getElementById("time1").innerHTML=time[nowstation+0]-departuretime
+        document.getElementById("time2").innerHTML=time[nowstation+1]-departuretime
+        document.getElementById("time3").innerHTML=time[nowstation+2]-departuretime
+        document.getElementById("time4").innerHTML=time[nowstation+3]-departuretime
+        document.getElementById("time5").innerHTML=time[nowstation+4]-departuretime
+        document.getElementById("relax0").innerHTML=""
+        document.getElementById("relax1").innerHTML=""
+        document.getElementById("relax2").innerHTML=""
+        document.getElementById("relax3").innerHTML=""
+        document.getElementById("relax4").innerHTML=""
+        let realstu=parseInt(stu)+1
+        relaxstation="relax"+parseInt(realstu-coffeecount-1)
+        console.log(relaxstation)
+        if(realstu-coffeecount-1<5&&realstu-coffeecount-1>-1){
+            document.getElementById(relaxstation).innerHTML="休"
+        }
+        relaxstation="relax"+(parseInt(realstu-coffeecount-1+parseInt(realstu)))
+        console.log(relaxstation)
+        if(realstu-coffeecount-1+parseInt(realstu)<5 && realstu-coffeecount-1+parseInt(realstu)>-1){
+            document.getElementById(relaxstation).innerHTML="休"
+        }
+        relaxstation="relax"+(parseInt(realstu-coffeecount-1+parseInt(realstu)+parseInt(realstu)))
+        console.log(relaxstation)
+        if(realstu-coffeecount-1+parseInt(realstu)+parseInt(realstu)<5 && realstu-coffeecount-1+parseInt(realstu)+parseInt(realstu)>-1){
+            document.getElementById(relaxstation).innerHTML="休"
+        }
+    }
+    </script>
+</body>
+</html>
