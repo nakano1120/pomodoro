@@ -60,6 +60,25 @@
     .blue{
         border:10px solid #00B2E5;
     }
+    #relax0{
+        margin: 0 auto 50px;
+        padding-top: 5px; /* 要素の上の余白調整 */
+        width: 6vw; /* 四角形の幅 */
+        height: 50px; /* 四角形の高さ */
+        background: #00ee00;
+        position: relative;
+    }
+    #relax0:after {
+        border-left: 25px solid #00ee00; /* 右向きの三角形を作るため左のボーダーに色を付ける */
+        border-top: 29px solid transparent; /* 上のボーダーを透過に指定 */
+        border-bottom: 29px solid transparent; /* 下のボーダーを透過に指定 */
+        content: "";
+        position: absolute;
+        left: 50%; /* 一旦中央へ寄せる */
+        top: 0;
+        margin-left: 3.5vw; /* 四角形の幅の半分右へ移動する */
+    }
+
     #stud{
         position:absolute;
         top:0;
