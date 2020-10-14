@@ -196,6 +196,7 @@
         let nowhour = Math.floor(now.getHours());
         let nowmin = Math.floor(now.getMinutes());
         let nowsec = Math.floor(now.getSeconds());
+        let ovake=0
         nowhour = addZero(nowhour);
         nowmin = addZero(nowmin);
         nowsec = addZero(nowsec);
@@ -208,7 +209,7 @@
             nowstation++
             coffeecount++
             console.log("あ"+coffeecount)
-
+            ovake=0
             let b = document.getElementById("bell");
             let d = document.getElementById("door");
             let c = document.getElementById("starting");
@@ -239,8 +240,11 @@
             }
         }
         if((min+departuretime)+1>=time[nowstation] && secsec>30){
-            const spe2 = new SpeechSynthesisUtterance("まもなく、"+station[nowstation]+"、"+station[nowstation]+"です。")
-            speechSynthesis.speak(spe2)
+            const spe2 = new SpeechSynthesisUtterance("まもなく、"+station[nowstation]+"、"+station[nowstation]+"です。電車とホームの間が空いていることがありますので、ご注意ください。")
+            if(ovake==0){
+               speechSynthesis.speak(spe2)
+               ovake=1
+            }
             document.getElementById("next").innerHTML="まもなく"
 
         }else{
