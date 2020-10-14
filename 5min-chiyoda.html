@@ -151,6 +151,7 @@
     let coffeecount=0
     let relaxstation=""
     let ovake=0
+    const spe = new SpeechSynthesisUtterance("次は、"+station[nowstation]+"にとまります。")
     const dep = document.getElementById('departure');
     const arr = document.getElementById('arrival');
     let stu = 0
@@ -221,8 +222,7 @@
             d.addEventListener("ended", function(){
 		        c.play();
 	        }, false);
-            c.addEventListener("ended", function(){
-		        const spe = new SpeechSynthesisUtterance("次は、"+station[nowstation]+"にとまります。")
+            c.addEventListener("ended", function(){ 
                 speechSynthesis.speak(spe)
 	        }, false);
             changenext();
