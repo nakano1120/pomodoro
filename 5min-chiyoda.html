@@ -223,7 +223,7 @@
 		        c.play();
 	        }, false);
             c.addEventListener("ended", function(){ 
-                spe.text="次は、"+station[nowstation]+"にとまります"
+                spe.text="次は、"+station[nowstation]+
                 speechSynthesis.speak(spe)
 	        }, false);
             changenext();
@@ -240,9 +240,9 @@
             }
         }
         if((min+departuretime)+1>=time[nowstation] && secsec>30){
-            const spe2 = new SpeechSynthesisUtterance("まもなく、"+station[nowstation]+"、"+station[nowstation]+"です。電車とホームの間が空いていることがありますので、ご注意ください。")
+            spe.text ="まもなく、"+station[nowstation]+"、"+station[nowstation]+"です。電車とホームの間が空いていることがありますので、ご注意ください。"
             if(ovake==0){
-               speechSynthesis.speak(spe2)
+               speechSynthesis.speak(spe)
                ovake=1
             }
             document.getElementById("next").innerHTML="まもなく"
