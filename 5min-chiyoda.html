@@ -61,8 +61,10 @@
     </style>
 </head>
 <body>
+    <audio id="ona" src="on_a_train.mp3" autoplay loop></audio>
     <audio id="bell" src="monorail-bell.mp3"></audio>
     <audio id="door" src="train-door1.mp3"></audio>
+    <audio id="starting" src="metro_starting.m4a"></audio>
     <div id="stud"><span id="study">勉強</span>　<span id="nowtimes">00:00:00</span></div>
     <!--<input type="button" value="1駅休憩" onclick="coffee()">-->
     <h1 id="nowtime">00:00:00</h1>
@@ -206,11 +208,22 @@
             nowstation++
             coffeecount++
             console.log("あ"+coffeecount)
+
             let b = document.getElementById("bell");
             let d = document.getElementById("door");
-            b.play();
+            let c = document.getElementById("starting");
+            let a = document.getElementById("ona");
+            b.play();     
             b.addEventListener("ended", function(){
 		        d.play();
+	        }, false);
+            d.addEventListener("ended", function(){
+		        c.play();
+	        }, false);
+            c.addEventListener("ended", function(){
+                a.play();
+		        const spe = new SpeechSynthesisUtterance("次は、"+station[nowstation]+"にとまります。")
+                speechSynthesis.speak(spe)
 	        }, false);
             changenext();
             if(waittime==1){
@@ -226,7 +239,10 @@
             }
         }
         if((min+departuretime)+1>=time[nowstation] && secsec>30){
+            const spe2 = new SpeechSynthesisUtterance("まもなく、"+station[nowstation]+"、"+station[nowstation]+"です。")
+            speechSynthesis.speak(spe2)
             document.getElementById("next").innerHTML="まもなく"
+
         }else{
             document.getElementById("next").innerHTML="次は"
         }
