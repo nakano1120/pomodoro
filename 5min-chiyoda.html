@@ -150,6 +150,7 @@
     let stationtimer
     let coffeecount=0
     let relaxstation=""
+    let ovake=0
     const dep = document.getElementById('departure');
     const arr = document.getElementById('arrival');
     let stu = 0
@@ -175,6 +176,7 @@
             return
         }
         alert("出発します。")
+        a.play();
         document.getElementById("startbutton").disabled = true;
         document.getElementById("departure").disabled = true;
         document.getElementById("arrival").disabled = true;
@@ -196,7 +198,6 @@
         let nowhour = Math.floor(now.getHours());
         let nowmin = Math.floor(now.getMinutes());
         let nowsec = Math.floor(now.getSeconds());
-        let ovake=0
         nowhour = addZero(nowhour);
         nowmin = addZero(nowmin);
         nowsec = addZero(nowsec);
@@ -222,7 +223,6 @@
 		        c.play();
 	        }, false);
             c.addEventListener("ended", function(){
-                a.play();
 		        const spe = new SpeechSynthesisUtterance("次は、"+station[nowstation]+"にとまります。")
                 speechSynthesis.speak(spe)
 	        }, false);
