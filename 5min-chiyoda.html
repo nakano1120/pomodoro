@@ -176,7 +176,7 @@
             return
         }
         alert("出発します。")
-        a.play();
+        document.getElementById("ona").play();
         document.getElementById("startbutton").disabled = true;
         document.getElementById("departure").disabled = true;
         document.getElementById("arrival").disabled = true;
@@ -214,7 +214,6 @@
             let b = document.getElementById("bell");
             let d = document.getElementById("door");
             let c = document.getElementById("starting");
-            let a = document.getElementById("ona");
             b.play();     
             b.addEventListener("ended", function(){
 		        d.play();
