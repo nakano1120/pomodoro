@@ -255,10 +255,25 @@
         numbering=addZero(numbering);
         if((Math.round(secsec/5)+1)%3==0){
             document.getElementById("nowstation").innerHTML=station[nowstation];
+            document.getElementById("no1").innerHTML=station[nowstation+0]
+            document.getElementById("no2").innerHTML=station[nowstation+1]
+            document.getElementById("no3").innerHTML=station[nowstation+2]
+            document.getElementById("no4").innerHTML=station[nowstation+3]
+            document.getElementById("no5").innerHTML=station[nowstation+4]
         }else if((Math.round(secsec/5)+1)%3==1){
             document.getElementById("nowstation").innerHTML=stationh[nowstation];
+            document.getElementById("no1").innerHTML=stationh[nowstation+0]
+            document.getElementById("no2").innerHTML=stationh[nowstation+1]
+            document.getElementById("no3").innerHTML=stationh[nowstation+2]
+            document.getElementById("no4").innerHTML=stationh[nowstation+3]
+            document.getElementById("no5").innerHTML=stationh[nowstation+4]
         }else if((Math.round(secsec/5)+1)%3==2){
             document.getElementById("nowstation").innerHTML=statione[nowstation];
+            document.getElementById("no1").innerHTML=statione[nowstation+0]
+            document.getElementById("no2").innerHTML=statione[nowstation+1]
+            document.getElementById("no3").innerHTML=statione[nowstation+2]
+            document.getElementById("no4").innerHTML=statione[nowstation+3]
+            document.getElementById("no5").innerHTML=statione[nowstation+4]
         }
         document.getElementById("nowtime").innerHTML=""+hour+":"+min2+":"+secsec+"."+point2;
         document.getElementById("nowtimes").innerHTML=""+nowhour+":"+nowmin+":"+nowsec
@@ -285,6 +300,25 @@
         document.getElementById("maybetime").innerHTML=maybetime
     }
     function changenext(){
+        if((Math.round(secsec/5)+1)%3==0){
+            document.getElementById("no1").innerHTML=station[nowstation+0]
+            document.getElementById("no2").innerHTML=station[nowstation+1]
+            document.getElementById("no3").innerHTML=station[nowstation+2]
+            document.getElementById("no4").innerHTML=station[nowstation+3]
+            document.getElementById("no5").innerHTML=station[nowstation+4]
+        }else if((Math.round(secsec/5)+1)%3==1){
+            document.getElementById("no1").innerHTML=stationh[nowstation+0]
+            document.getElementById("no2").innerHTML=stationh[nowstation+1]
+            document.getElementById("no3").innerHTML=stationh[nowstation+2]
+            document.getElementById("no4").innerHTML=stationh[nowstation+3]
+            document.getElementById("no5").innerHTML=stationh[nowstation+4]
+        }else if((Math.round(secsec/5)+1)%3==2){
+            document.getElementById("no1").innerHTML=statione[nowstation+0]
+            document.getElementById("no2").innerHTML=statione[nowstation+1]
+            document.getElementById("no3").innerHTML=statione[nowstation+2]
+            document.getElementById("no4").innerHTML=statione[nowstation+3]
+            document.getElementById("no5").innerHTML=statione[nowstation+4]
+        }
         document.getElementById("no1").innerHTML=station[nowstation+0]
         document.getElementById("no2").innerHTML=station[nowstation+1]
         document.getElementById("no3").innerHTML=station[nowstation+2]
