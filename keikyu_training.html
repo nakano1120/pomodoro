@@ -189,6 +189,7 @@
         stationtimer = setInterval(timermain, 100);
     }
     function timermain(){
+        const stbw = stb.value;
         let now = new Date();
         let diftime = (now.getTime() - start.getTime());
         let point = Math.floor(diftime / 100);
@@ -213,7 +214,7 @@
         min2 = addZero(minmin);
         min4 = addZero(min3);
         hour = addZero(hour);
-        if(min+departuretime>=time[nowstation]){
+        if(min+departuretime>=stbw*nowstation){
             nowstation++
             coffeecount++
             console.log("あ"+coffeecount)
@@ -236,7 +237,7 @@
                 document.getElementById("study").style.color="#00B2E5"
             }
         }
-        if((min+departuretime)+1>=time[nowstation] && secsec>30){
+        if((min+departuretime)+1>=stbw*nowstation && secsec>30){
             document.getElementById("next").innerHTML="まもなく"
         }else{
             document.getElementById("next").innerHTML="次は"
@@ -278,16 +279,17 @@
         document.getElementById("maybewalk").innerHTML = parseInt(maybe*walkm*6)
     }
     function changenext(){
+        const stbw = stb.value;
         document.getElementById("no1").innerHTML=station[nowstation+0]
         document.getElementById("no2").innerHTML=station[nowstation+1]
         document.getElementById("no3").innerHTML=station[nowstation+2]
         document.getElementById("no4").innerHTML=station[nowstation+3]
         document.getElementById("no5").innerHTML=station[nowstation+4]
-        document.getElementById("time1").innerHTML=time[nowstation+0]-departuretime
-        document.getElementById("time2").innerHTML=time[nowstation+1]-departuretime
-        document.getElementById("time3").innerHTML=time[nowstation+2]-departuretime
-        document.getElementById("time4").innerHTML=time[nowstation+3]-departuretime
-        document.getElementById("time5").innerHTML=time[nowstation+4]-departuretime
+        document.getElementById("time1").innerHTML=stbw*(nowstation+0)-departuretime
+        document.getElementById("time2").innerHTML=stbw*(nowstation+1)-departuretime
+        document.getElementById("time3").innerHTML=stbw*(nowstation+2)-departuretime
+        document.getElementById("time4").innerHTML=stbw*(nowstation+3)-departuretime
+        document.getElementById("time5").innerHTML=stbw*(nowstation+4)-departuretime
         document.getElementById("relax0").innerHTML=""
         document.getElementById("relax1").innerHTML=""
         document.getElementById("relax2").innerHTML=""
