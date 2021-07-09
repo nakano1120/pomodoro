@@ -9,6 +9,7 @@
     *{
         margin:0;
         padding:0;
+        text-align:center;
     }
     body{
         text-align:center;
@@ -28,22 +29,22 @@
         top:0;
         background-image: url("img/odakyu.png");
         background-size: contain;
-        height:15vw;
+        height:30%;
     }
     #study{
         color:#ffffff;
         border: 5px solid white;
         background-color:#000000;
         position: relative;
-        top:10px;
-        padding:5px 50px;
+        top:0px;
+        padding:5px 4vw;
         margin:10px;
         border-radius:5px;
+        font-size:3vw;
     }
     #nowtimes{
         color:#111111;
-        position: relative;
-        top:10px;
+        font-size:3vw;
     }
     h2{
         padding-top:100px;
@@ -55,7 +56,7 @@
         position:absolute;
         top:0;
         right:0;
-        font-size:2vw;
+        font-size:3vw;
     }
     .relax{
         color:#00B2E5;
@@ -66,9 +67,8 @@
         top:-2vw;
     }
     #nowstation{
-        padding:10px;
-        margin-left:10vw;
-        font-size:8vw;
+        margin-left:5vw;
+        font-size:6.5vw;
     }
     table{
         margin-left:auto;
@@ -81,39 +81,38 @@
     }
     td{
         box-sizing: border-box;
-        font-size:300%;
+        font-size:3vw;
         font-weight: bold;
-        max-width:100px;
+        max-width:5vw;
         
     }
-    .ue{
-        -ms-writing-mode: tb-rl;
-        writing-mode: vertical-rl;
+    #ue{
+        font-size:100%;
+        text-align:right;
     }
     .yoko{
-        text-align:center;
+        text-align:right;
         padding:10px;
-        transform: translateX(20%);
+        transform: rotate(80deg) translateX(-100%);
         white-space: nowrap;
-        height:200px;
+        height:40vh;
     }
     .glaytext{
         color:#bbbbbb;
     }
     .blue{
-        border:20px solid #ffcc99;
+        border:1vw solid #ffcc99;
         width:10vw;
         height: 10vh;
     }
     .glay{
-        border:20px solid #dddddd;
+        border:1vw solid #dddddd;
         width:10vw;
         height: 10vh;
     }
     .mini{
         background-color: #fefefe;
         border-radius:3px;
-        padding:0px 20px;
     }
     .sample5-1::before{
         left: 3px;
@@ -132,33 +131,22 @@
         font-size:300%;
         font-weight: bold;
     }
-    @media all and (max-width: 700px) {
-        #nowstation{
-            font-size:180%;
-        }
-        #stud{
-            font-size:150%;
-        }
-        #nowtime{
-            font-size:200%;
-        }
-    }
     </style>
 </head>
 <body>
-    <div class="space1">
     <audio id="bell" src="monorail-bell.mp3"></audio>
     <audio id="door" src="train-door1.mp3"></audio>
-    <span id="stud"><span id="study">勉強</span>　<span id="nowtimes">渋谷　ゆき</span></span>
+    <div class="space1">
+    <span id="stud"><span id="study">勉強</span>　<span id="nowtimes">小田原　ゆき</span></span>
     <!--<input type="button" value="1駅休憩" onclick="coffee()">-->
     <span id="nowtime">00:00:00</span>
-    <h2 class="nextarr"><span id="next">次は</span>　<span id="nowstation">渋谷</span></h2>
+    <h2 class="nextarr"><span id="next">次は</span>　<span id="nowstation">小田原</span></h2>
     </div>
     <div class="main">
         <br>
         <table>
-            <tr class="ue">
-                <td id="no1" class="yoko glaytext">小</td><td id="no2" class="yoko">田</td><td id="no3" class="yoko">休校</td><td id="no4" class="yoko">白楽</td><td id="no5" class="yoko">妙蓮寺</td><td id="no6" class="yoko">菊名</td><td id="no7" class="yoko">大倉山</td><td id="no8" class="yoko">綱島</td><td id="no9" class="yoko">日吉</td><td id="no10" class="yoko">元住吉</td>
+            <tr id="ue">
+                <td id="no1" class="yoko glaytext"></td><td id="no2" class="yoko">　</td><td id="no3" class="yoko">　</td><td id="no4" class="yoko">　</td><td id="no5" class="yoko">　</td><td id="no6" class="yoko">　</td><td id="no7" class="yoko">　</td><td id="no8" class="yoko">　</td><td id="no9" class="yoko">　</td><td id="no10" class="yoko">　</td>
             </tr>
             <tr class="bigblue">
                 <td class="blue glay" ><span class="mini" id="time1">0</span></td><td class="blue"><span class="mini" id="time2">0</span></td><td class="blue"><span class="mini" id="time3">0</span></td><td class="blue"><span class="mini" id="time4">0</span></td><td class="blue"><span class="mini" id="time5">0</span></td><td class="blue"><span class="mini" id="time6">0</span></td><td class="blue"><span class="mini" id="time7">0</span></td><td class="blue"><span class="mini" id="time8">0</span></td><td class="blue"><span class="mini" id="time9">0</span></td><td class="blue"><span class="mini" id="time10">0</span></td>
@@ -205,7 +193,7 @@
         </div>
     </div>
     <script>
-    const time=[0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,120,125,130,135,140,145,160,175,180,185,190,195,200,205,210,215,220,225,230,235,240,245,250,255,260,265,270,275,280,290,300]
+    const time=[0,1,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,120,125,130,135,140,145,160,175,180,185,190,195,200,205,210,215,220,225,230,235,240,245,250,255,260,265,270,275,280,290,300]
     const between=[]
     const station=["新宿","南新宿","参宮橋","代々木八幡","代々木上原","東北沢","下北沢","世田谷代田","梅ヶ丘","豪徳寺","経堂","千歳船橋","祖師ヶ谷大蔵","成城学園前","喜多見","狛江","和泉多摩川","登戸","向ヶ丘遊園","生田","読売ランド前","百合ヶ丘","新百合ヶ丘","柿生","鶴川","玉川学園前","町田","相模大野","小田急相模原","相武台前","座間","海老名","厚木","本厚木","愛甲石田","伊勢原","鶴巻温泉","東海大学前","秦野","渋沢","新松田","開成","栢山","富水","螢田","足柄","小田原","","","","","","","","","","","","","",""]
     const stationh=["しんじゅく","みなみしんじゅく","さんぐうばし","よよぎはちまん","よよぎうえはら","ひがしきたざわ","しもきたざわ","せたがやだいた","うめがおか","ごうとくじ","きょうどう","ちとせふなばし","そしがやおおくら","せいじょうがくえんまえ","きたみ","こまえ","いずみたまがわ","のぼりと","むこうがおかゆうえん","いくた","よみうりらんどまえ","ゆりがおか","しんゆりがおか","かきお","つるかわ","たまがわがくえんまえ","まちだ","さがみおおの","おだきゅうさがみはら","そうぶだいまえ","ざま","えびな","あつぎ","ほんあつぎ","あいこういしだ","いせはら","つるまき","とうかいだいがくまえ","はだの","しぶさわ","しんまつだ","かいせい","かやま","とみず","ほたるだ","あしがら","おだわら","","","","","",""]
@@ -240,8 +228,8 @@
             return
         }
         start = new Date();
-        departuretime = depvalue*stbw;
-        arrivaltime = arrvalue*stbw;
+        departuretime = time[depvalue];
+        arrivaltime = time[arrvalue];
         console.log(departuretime + " " + arrivaltime)
         alltime=arrivaltime-departuretime;
         nowstation=parseInt(depvalue);
@@ -296,12 +284,13 @@
 		        d.play();
 	        }, false);
             d.addEventListener("ended", function(){ 
-                speechSynthesis.cancel()
                 spe.text = "次は、"+station[nowstation]+"、"+station[nowstation]+"です。"
                 spe.lang = "ja-JP"
                 speechSynthesis.speak(spe)
 	        }, false);
-            changenext();
+            spe.addEventListener("end", function(){ 
+                speechSynthesis.cancel()
+            }, false);
             if(waittime==1){
                 waittime=0;
                 document.getElementById("study").innerHTML="勉強"
@@ -313,6 +302,13 @@
                 document.getElementById("study").innerHTML="休憩"
                 document.getElementById("study").style.color="#FFCC00"
             }
+        }
+        if((Math.round(secsec/5)+1)%3==0){
+            changenext(0);
+        }else if((Math.round(secsec/5)+1)%3==1){
+            changenext(0);
+        }else if((Math.round(secsec/5)+1)%3==2){
+            changenext(1);
         }
         if((min+departuretime)+1>=time[nowstation] && secsec>30){
             if((Math.round(secsec/5)+1)%3==0){
@@ -368,11 +364,20 @@
         let maybetime=arrivaltime-departuretime
         document.getElementById("maybetime").innerHTML=maybetime
     }
-    function changenext(){
+    function changenext(je){
         let l=0
-        for(let i=0;i<10;i++){
-            let l=i+1
-            document.getElementById("no"+l).innerHTML=station[nowstation+i-1]
+        if(je==1){
+            document.getElementById("ue").style.fontSize="70%"
+            for(let i=0;i<10;i++){
+                let l=i+1
+                document.getElementById("no"+l).innerHTML=statione[nowstation+i-1]
+            }
+        }else{
+            document.getElementById("ue").style.fontSize="100%"
+            for(let i=0;i<10;i++){
+                let l=i+1
+                document.getElementById("no"+l).innerHTML=station[nowstation+i-1]
+            }
         }
         for(let i=0;i<10;i++){
             let l=i+1
