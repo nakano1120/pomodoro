@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ポモドーロタイマー - 小田急小田原線5分等間隔</title>
+    <style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    body{
+        text-align:center;
+        font-family:sans-serif;
+        width:100%;
+    }
+    .main{
+        display:inline-block;
+        width:100%;
+        padding:0;
+        margin:0 auto;
+        background-color:white;
+    }
+    .space1{
+        color:#111111;
+        position: relative;
+        top:0;
+        background-image: url("img/odakyu.png");
+        background-size: contain;
+        height:15vw;
+    }
+    #study{
+        color:#ffffff;
+        border: 5px solid white;
+        background-color:#000000;
+        position: relative;
+        top:10px;
+        padding:5px 50px;
+        margin:10px;
+        border-radius:5px;
+    }
+    #nowtimes{
+        color:#111111;
+        position: relative;
+        top:10px;
+    }
+    h2{
+        padding-top:100px;
+    }
+    #studytime{
+        width:50px;
+    }
+    #nowtime{
+        position:absolute;
+        top:0;
+        right:0;
+        font-size:2vw;
+    }
+    .relax{
+        color:#00B2E5;
+        width:100px;
+    }
+    .nextarr{
+        position:relative;
+        top:-2vw;
+    }
+    #nowstation{
+        padding:10px;
+        margin-left:10vw;
+        font-size:8vw;
+    }
+    table{
+        margin-left:auto;
+        margin-right:auto;
+        margin-top:10vh;
+        padding-bottom:15vh;
+        width:90%;
+        border:none;
+        border-collapse: collapse ;
+    }
+    td{
+        box-sizing: border-box;
+        font-size:300%;
+        font-weight: bold;
+        max-width:100px;
+        
+    }
+    .ue{
+        -ms-writing-mode: tb-rl;
+        writing-mode: vertical-rl;
+    }
+    .yoko{
+        text-align:center;
+        padding:10px;
+        transform: translateX(20%);
+        white-space: nowrap;
+        height:200px;
+    }
+    .glaytext{
+        color:#bbbbbb;
+    }
+    .blue{
+        border:20px solid #ffcc99;
+        width:10vw;
+        height: 10vh;
+    }
+    .glay{
+        border:20px solid #dddddd;
+        width:10vw;
+        height: 10vh;
+    }
+    .mini{
+        background-color: #fefefe;
+        border-radius:3px;
+        padding:0px 20px;
+    }
+    .sample5-1::before{
+        left: 3px;
+        width: 4px;
+        height: 4px;
+        border-top: 1px solid #7a0;
+        border-right: 1px solid #7a0;
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+    #stud{
+        position:absolute;
+        top:0;
+        left:0;
+        color:#F00;
+        font-size:300%;
+        font-weight: bold;
+    }
+    @media all and (max-width: 700px) {
+        #nowstation{
+            font-size:180%;
+        }
+        #stud{
+            font-size:150%;
+        }
+        #nowtime{
+            font-size:200%;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="space1">
+    <audio id="bell" src="monorail-bell.mp3"></audio>
+    <audio id="door" src="train-door1.mp3"></audio>
+    <span id="stud"><span id="study">勉強</span>　<span id="nowtimes">渋谷　ゆき</span></span>
+    <!--<input type="button" value="1駅休憩" onclick="coffee()">-->
+    <span id="nowtime">00:00:00</span>
+    <h2 class="nextarr"><span id="next">次は</span>　<span id="nowstation">渋谷</span></h2>
+    </div>
+    <div class="main">
+        <br>
+        <table>
+            <tr class="ue">
+                <td id="no1" class="yoko glaytext">小</td><td id="no2" class="yoko">田</td><td id="no3" class="yoko">休校</td><td id="no4" class="yoko">白楽</td><td id="no5" class="yoko">妙蓮寺</td><td id="no6" class="yoko">菊名</td><td id="no7" class="yoko">大倉山</td><td id="no8" class="yoko">綱島</td><td id="no9" class="yoko">日吉</td><td id="no10" class="yoko">元住吉</td>
+            </tr>
+            <tr class="bigblue">
+                <td class="blue glay" ><span class="mini" id="time1">0</span></td><td class="blue"><span class="mini" id="time2">0</span></td><td class="blue"><span class="mini" id="time3">0</span></td><td class="blue"><span class="mini" id="time4">0</span></td><td class="blue"><span class="mini" id="time5">0</span></td><td class="blue"><span class="mini" id="time6">0</span></td><td class="blue"><span class="mini" id="time7">0</span></td><td class="blue"><span class="mini" id="time8">0</span></td><td class="blue"><span class="mini" id="time9">0</span></td><td class="blue"><span class="mini" id="time10">0</span></td>
+            </tr>
+        </table><br>
+        <div id="setting">
+            <select id="departure" onchange="changestation()">
+                <option value="0">新宿</option>
+                <option value="4">代々木上原</option>
+                <option value="6">下北沢</option>
+                <option value="10">経堂</option>
+                <option value="17">登戸</option>
+                <option value="22">新百合ヶ丘</option>
+                <option value="26">町田</option>
+                <option value="27">相模大野</option>
+                <option value="31">海老名</option>
+                <option value="33">本厚木</option>
+                <option value="35">伊勢原</option>
+                <option value="38">秦野</option>
+                <option value="46">小田原</option>
+            </select>
+            始発
+            <select id="arrival" onchange="changestation()">
+                <option value="0">新宿</option>
+                <option value="4">代々木上原</option>
+                <option value="6">下北沢</option>
+                <option value="10">経堂</option>
+                <option value="17">登戸</option>
+                <option value="22">新百合ヶ丘</option>
+                <option value="26">町田</option>
+                <option value="27">相模大野</option>
+                <option value="31">海老名</option>
+                <option value="33">本厚木</option>
+                <option value="35">伊勢原</option>
+                <option value="38">秦野</option>
+                <option value="46" selected>小田原</option>
+            </select>
+            行き<br>
+            <br>
+            推定所要時間　<span id="maybetime">0</span>　分
+            一駅間:<input type="number" id="studytime"  value="5">分<br>
+            <h3><a href="index.html">戻る</a></h3>
+            <input type="button" id="startbutton" value="出発" onclick="timer()">
+        </div>
+    </div>
+    <script>
+    const time=[0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,120,125,130,135,140,145,160,175,180,185,190,195,200,205,210,215,220,225,230,235,240,245,250,255,260,265,270,275,280,290,300]
+    const between=[]
+    const station=["新宿","南新宿","参宮橋","代々木八幡","代々木上原","東北沢","下北沢","世田谷代田","梅ヶ丘","豪徳寺","経堂","千歳船橋","祖師ヶ谷大蔵","成城学園前","喜多見","狛江","和泉多摩川","登戸","向ヶ丘遊園","生田","読売ランド前","百合ヶ丘","新百合ヶ丘","柿生","鶴川","玉川学園前","町田","相模大野","小田急相模原","相武台前","座間","海老名","厚木","本厚木","愛甲石田","伊勢原","鶴巻温泉","東海大学前","秦野","渋沢","新松田","開成","栢山","富水","螢田","足柄","小田原","","","","","","","","","","","","","",""]
+    const stationh=["しんじゅく","みなみしんじゅく","さんぐうばし","よよぎはちまん","よよぎうえはら","ひがしきたざわ","しもきたざわ","せたがやだいた","うめがおか","ごうとくじ","きょうどう","ちとせふなばし","そしがやおおくら","せいじょうがくえんまえ","きたみ","こまえ","いずみたまがわ","のぼりと","むこうがおかゆうえん","いくた","よみうりらんどまえ","ゆりがおか","しんゆりがおか","かきお","つるかわ","たまがわがくえんまえ","まちだ","さがみおおの","おだきゅうさがみはら","そうぶだいまえ","ざま","えびな","あつぎ","ほんあつぎ","あいこういしだ","いせはら","つるまき","とうかいだいがくまえ","はだの","しぶさわ","しんまつだ","かいせい","かやま","とみず","ほたるだ","あしがら","おだわら","","","","","",""]
+    const statione=["Shinjuku","Minami-shinjuku","Sangubashi","Yoyogi-hachiman","Yoyogi-uehaera","Higashi-kitazawa","Shimokitazawa","Setagayadaita","Umegaoka","Goutokuji","Kyodo","Chitose-funabashi","Soshigaya-okura","Seijogakuen-mae","Kitami","Komae","Izumi-tamagawa","Noborito","Mukogaoka-yuen","Ikuta","Yomiuriland-mae","Yurigaoka","Shin-yurigaoka","Kakio","Tsurukawa","Tamagawagakuen-mae","Machida","Sagami-ono","Odakyu-sagamihara","Sobudai-mae","Zama","Ebina","Atsugi","Hon-atsugi","Aiko-ishida","Isehara","Tsurumaki","Tokaidaigaku-mae","Hadano","Shibusawa","Shin-matsuda","Kaisei","Kayama","Tomizu","Hotaruda","Ashigara","Odawara","","","","","","","","","","","","",""]
+    let alltime=0
+    let departuretime=0
+    let arrivaltime=0
+    let waittime=0
+    let nowstation=0
+    let section=""
+    let stationtimer
+    let coffeecount=0
+    let relaxstation=""
+    let spe = new SpeechSynthesisUtterance();
+    const dep = document.getElementById('departure');
+    const arr = document.getElementById('arrival');
+    const depvalue = 0
+    const arrvalue = 0
+    let stu = 0
+    let stbw = 5
+    function timer(){
+        document.getElementById("setting").style.display="none";
+        const depindex = dep.selectedIndex;
+        const arrindex = arr.selectedIndex;
+        const depvalue = dep.options[depindex].value;
+        const arrvalue = arr.options[arrindex].value;
+        stu = document.getElementById('studytime').value;
+
+        console.log(stu)
+        if(stu < 1){
+            alert("勉強区間が不正です")
+            return
+        }
+        start = new Date();
+        departuretime = depvalue*stbw;
+        arrivaltime = arrvalue*stbw;
+        console.log(departuretime + " " + arrivaltime)
+        alltime=arrivaltime-departuretime;
+        nowstation=parseInt(depvalue);
+        if(alltime<1){
+            alert("出発地点、到着地点が不正です")
+            return
+        }
+        alert("出発します。")
+        speechSynthesis.cancel()
+        spe.text = "本日も小田急線をご利用いただきまして、ありがとうございます。この電車は、各駅停車、"+station[arrvalue]+"ゆきです。"
+        spe.lang = "ja-JP"
+        speechSynthesis.speak(spe)
+        document.getElementById("startbutton").disabled = true;
+        document.getElementById("departure").disabled = true;
+        document.getElementById("arrival").disabled = true;
+        spe.addEventListener("end", function(){
+            stationtimer = setInterval(timermain, 100);
+	    }, false);
+    }
+    function timermain(){
+        let now = new Date();
+        let diftime = (now.getTime() - start.getTime());
+        let point = Math.floor(diftime / 100);
+        let point2 = Math.floor(point % 10);
+        let point3 = parseInt(9)-Math.floor(point % 10);
+        let sec = Math.floor(diftime / 1000);
+        let secsec = Math.floor(sec % 60);
+        let sec3 = parseInt(59)-Math.floor(sec % 60);
+        let min = Math.floor(sec / 60);
+        let minmin = Math.floor(min % 60);
+        let min3 = (parseInt(time[nowstation])-parseInt(time[nowstation-1]))-(parseInt(Math.floor(sec / 60))-parseInt(time[nowstation-1]))-1;
+        let hour = Math.floor(min / 60);
+        let nowhour = Math.floor(now.getHours());
+        let nowmin = Math.floor(now.getMinutes());
+        let nowsec = Math.floor(now.getSeconds());
+        nowhour = addZero(nowhour);
+        nowmin = addZero(nowmin);
+        nowsec = addZero(nowsec);
+        secsec = addZero(secsec);
+        sec4 = addZero(sec3)
+        min2 = addZero(minmin);
+        min4 = addZero(min3);
+        hour = addZero(hour);
+        if(min+departuretime>=time[nowstation]){
+            nowstation++
+            coffeecount++
+            console.log("あ"+coffeecount)
+            let b = document.getElementById("bell");
+            let d = document.getElementById("door");
+            b.play();
+            b.addEventListener("ended", function(){
+		        d.play();
+	        }, false);
+            d.addEventListener("ended", function(){ 
+                speechSynthesis.cancel()
+                spe.text = "次は、"+station[nowstation]+"、"+station[nowstation]+"です。"
+                spe.lang = "ja-JP"
+                speechSynthesis.speak(spe)
+	        }, false);
+            changenext();
+            if(waittime==1){
+                waittime=0;
+                document.getElementById("study").innerHTML="勉強"
+                document.getElementById("study").style.backgroundColor="#000000"
+            }
+            if(coffeecount>stu){
+                coffeecount=0;
+                waittime=1;
+                document.getElementById("study").innerHTML="休憩"
+                document.getElementById("study").style.color="#FFCC00"
+            }
+        }
+        if((min+departuretime)+1>=time[nowstation] && secsec>30){
+            if((Math.round(secsec/5)+1)%3==0){
+                document.getElementById("next").innerHTML="まもなく"
+            }else if((Math.round(secsec/5)+1)%3==1){
+                document.getElementById("next").innerHTML="まもなく"
+            }else if((Math.round(secsec/5)+1)%3==2){
+                document.getElementById("next").innerHTML="Soon"
+            }
+        }else{
+            if((Math.round(secsec/5)+1)%3==0){
+                document.getElementById("next").innerHTML="次は"
+            }else if((Math.round(secsec/5)+1)%3==1){
+                document.getElementById("next").innerHTML="つぎは"
+            }else if((Math.round(secsec/5)+1)%3==2){
+                document.getElementById("next").innerHTML="Next"
+            }
+        }
+        if((Math.round(secsec/5)+1)%3==0){
+            document.getElementById("nowstation").innerHTML=station[nowstation];
+        }else if((Math.round(secsec/5)+1)%3==1){
+            document.getElementById("nowstation").innerHTML=stationh[nowstation];
+        }else if((Math.round(secsec/5)+1)%3==2){
+            document.getElementById("nowstation").innerHTML=statione[nowstation];
+        }
+        document.getElementById("nowtime").innerHTML=""+hour+":"+min2+":"+secsec+"."+point2;
+        if((Math.round(secsec/5)+1)%3==0){
+            document.getElementById("nowtimes").innerHTML=station[arr.options[arr.selectedIndex].value]+" ゆき"
+        }else if((Math.round(secsec/5)+1)%3==1){
+            document.getElementById("nowtimes").innerHTML=stationh[arr.options[arr.selectedIndex].value]+" ゆき"
+        }else if((Math.round(secsec/5)+1)%3==2){
+            document.getElementById("nowtimes").innerHTML="for "+statione[arr.options[arr.selectedIndex].value]
+        }
+        ////document.getElementById("sectiontime").innerHTML=""+hour+":"+min4+":"+sec4+"."+point3;
+        if(min>=alltime){
+            clearInterval(stationtimer);
+            alert("終了です。")
+        }
+    }
+    var addZero = function (value) {
+        if (value < 10 && value > -1) {
+            value = '0' + value;
+        }
+        return value;
+    }
+    function changestation(){
+        const depindex = dep.selectedIndex;
+        const arrindex = arr.selectedIndex;
+        const depvalue = dep.options[depindex].value;
+        const arrvalue = arr.options[arrindex].value;
+        departuretime = depvalue*stbw;
+        arrivaltime = arrvalue*stbw;
+        let maybetime=arrivaltime-departuretime
+        document.getElementById("maybetime").innerHTML=maybetime
+    }
+    function changenext(){
+        let l=0
+        for(let i=0;i<10;i++){
+            let l=i+1
+            document.getElementById("no"+l).innerHTML=station[nowstation+i-1]
+        }
+        for(let i=0;i<10;i++){
+            let l=i+1
+            document.getElementById("time"+l).innerHTML=time[nowstation+i-1]-departuretime
+        }
+        let realstu=parseInt(stu)+1
+    }
+    function coffee(){
+    }
+    </script>
+</body>
+</html>
