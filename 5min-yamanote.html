@@ -129,7 +129,7 @@
     const between=[]
     const station=["東京","神田","秋葉原","御徒町","上野","鶯谷","日暮里","西日暮里","田端","駒込","巣鴨","大塚","池袋","目白","高田馬場","新大久保","新宿","代々木","原宿","渋谷","恵比寿","目黒","五反田","大崎","品川","高輪ゲートウェイ","田町","浜松町","新橋","有楽町","東京","","","","",""]
     const stationh=["とうきょう","かんだ","あきはばら","おかちまち","うえの","うぐいすだに","にっぽり","にしにっぽり","たばた","こまごめ","すがも","おおつか","いけぶくろ","めじろ","たかだのばば","しんおおくぼ","しんじゅく","よよぎ","はらじゅく","しぶや","えびす","めぐろ","ごたんだ","おおさき","しながわ","たかなわげーとうぇい","たまち","はままつちょう","しんばし","ゆうらくちょう","とうきょう","","","","",""]
-        const statione=["Tokyo","Kanda","Akihabara","Okachimachi","Ueno","Uguisudani","Nippori","Nishi-Nippori","Tabata","Komagome","Sugamo","Otuka","Ikebukuro","Mejiro","Takadanobaba","Shin-Okubo","Shinjuku","Yoyogi","Harajuku","Shibuya","Ebisu","Meguro","Gotanda","Osaki","Shinagawa","Takanawa Gateway","Tamachi","Hamamatsucho","Shimbashi","Yurakucho","Tokyo","","","","",""]
+    const statione=["Tokyo","Kanda","Akihabara","Okachimachi","Ueno","Uguisudani","Nippori","Nishi-Nippori","Tabata","Komagome","Sugamo","Otuka","Ikebukuro","Mejiro","Takadanobaba","Shin-Okubo","Shinjuku","Yoyogi","Harajuku","Shibuya","Ebisu","Meguro","Gotanda","Osaki","Shinagawa","Takanawa Gateway","Tamachi","Hamamatsucho","Shimbashi","Yurakucho","Tokyo","","","","",""]
     let alltime=0
     let departuretime=0
     let arrivaltime=0
@@ -156,8 +156,8 @@
             return
         }
         start = new Date();
-        departuretime = time[depvalue];
-        arrivaltime = time[arrvalue];
+        departuretime = depvalue*stbw;
+        arrivaltime = arrvalue*stbw;
         console.log(departuretime + " " + arrivaltime)
         alltime=arrivaltime-departuretime;
         nowstation=parseInt(depvalue);
@@ -195,7 +195,6 @@
         min2 = addZero(minmin);
         min4 = addZero(min3);
         hour = addZero(hour);
-        }
         if(min+departuretime>=time[nowstation]){
             nowstation++
             coffeecount++
@@ -212,8 +211,12 @@
 		        c.play();
 	        }, false);
             c.addEventListener("ended", function(){ 
-                spe.text="次は、"+station[nowstation]+
+                speechSynthesis.cancel()
+                spe.text = "次は、"+station[nowstation]+"です。"
+                spe.lang = "ja-JP"
                 speechSynthesis.speak(spe)
+                spe.lang = "en-US"
+                spe.text = "The next station is,"+statione[nowstation]
 	        }, false);
             changenext();
             if(waittime==1){
@@ -228,8 +231,15 @@
                 document.getElementById("study").style.color="#00B2E5"
             }
         }
-        if((min+departuretime)+1>=time[nowstation] && secsec>30){
-            spe.text ="まもなく、"+station[nowstation]+"、"+station[nowstation]+"です。電車とホームの間が空いていることがありますので、ご注意ください。"
+        if((min+departuretime)+1>time[nowstation] && secsec>30){
+            speechSynthesis.cancel()
+            spe.lang = "ja-JP"
+            spe.text="まもなく、"+station[nowstation]+"、"+station[nowstation]+"です。"
+            if(ovake==0){
+               speechSynthesis.speak(spe)
+            }
+            spe.lang = "en-US"
+            spe.text="The next station is,"+statione[nowstation]
             if(ovake==0){
                speechSynthesis.speak(spe)
                ovake=1
@@ -273,8 +283,8 @@
         const arrindex = arr.selectedIndex;
         const depvalue = dep.options[depindex].value;
         const arrvalue = arr.options[arrindex].value;
-        departuretime = time[depvalue];
-        arrivaltime = time[arrvalue];
+        departuretime = depvalue*stbw;
+        arrivaltime = arrvalue*stbw;
         let maybetime=arrivaltime-departuretime
         document.getElementById("maybetime").innerHTML=maybetime
     }

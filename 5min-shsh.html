@@ -25,11 +25,8 @@
     }
     .space1{
         color:#fefefe;
-        position: relative;
-        top:0;
         background-color: #262626;
-        background-size: contain;
-        height:40vh;
+        height:30vh;
     }
     #next{
         font-size:3vw;
@@ -40,9 +37,7 @@
         color:#ffffff;
         border: 5px solid white;
         background-color:#000000;
-        position: relative;
-        top:0px;
-        padding:5px 4vw;
+        padding:3px 4vw;
         margin:10px;
         border-radius:5px;
         font-size:3vw;
@@ -52,7 +47,7 @@
         color:#fefefe;
         font-size:3vw;
         position:relative;
-        top:1.5vh;
+        top:calc(30vh - 15vw);
     }
     h2{
         padding-top:100px;
@@ -72,7 +67,7 @@
     }
     .nextarr{
         position:relative;
-        padding-top:3vh;
+        padding-top:calc(30vh - 15vw);
     }
     #nowstation{
         font-size:11vw;
@@ -88,10 +83,6 @@
         font-size:3vw;
         
     }
-    table.nowparts{
-        position:absolute;
-        top:0;
-    }
     table.maintab td{
         max-width:5vw;
     }
@@ -99,15 +90,14 @@
         width:20vw;
     }
     .colors{
-        height:10vh;
         width:10vw;
         border:solid #262626;
-        border-width:0 2vw;
+        border-width:1vh 2.5vw 0;
         background-color:#e31f26;
     }
     .forst{
         float:right;
-        width:75vw;
+        width:70vw;
     }
     td{
         box-sizing: border-box;
@@ -154,7 +144,7 @@
     }
     #fors{
         font-size:2.5vw;
-        margin-top:2.5vh;
+        top:calc(30vh - 13vw);
         position:relative;
         left:5vw;
     }
@@ -163,7 +153,6 @@
         top:0;
         left:0;
         color:#fefefe;
-        font-size:300%;
         font-weight: bold;
     }
     @media all and (max-height: 500px) {
@@ -362,7 +351,7 @@
                 let nowhash = new Date()
                 let difftime = (nowhash.getTime() - hashnow.getTime());
                 console.log(difftime)
-                if(difftime/1000>Math.random()*(13)+2){
+                if(difftime/1000>Math.random()*(20)+2){
                     b.pause();
                     b.currentTime = 0;
                     clearInterval(bplay);
