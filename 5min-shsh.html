@@ -257,6 +257,7 @@
     let coffeecount=0
     let relaxstation=""
     let spe = new SpeechSynthesisUtterance();
+    let spe2 = new SpeechSynthesisUtterance();
     const dep = document.getElementById('departure');
     const arr = document.getElementById('arrival');
     const depvalue = 0
@@ -314,6 +315,9 @@
             stationtimer = setInterval(timermain, 100);
 	    }, false);
     }
+    function anko(){
+        console.log("stay")
+    }
     function timermain(){
         let now = new Date();
         let diftime = (now.getTime() - start.getTime());
@@ -350,11 +354,36 @@
             coffeecount++
             console.log("あ"+coffeecount)
             let b = document.getElementById("bell");
+            b.loop = true;
             let d = document.getElementById("door");
             b.play();
-            b.addEventListener("ended", function(){
-		        d.play();
-	        }, false);
+            let hashnow = new Date();
+            b.addEventListener("play", function(){
+                let nowhash = new Date()
+                let difftime = (nowhash.getTime() - hashnow.getTime());
+                console.log(difftime)
+                if(difftime/1000>Math.random()*(8)+2){
+                    b.pause();
+                    b.currentTime = 0;
+                }
+            }, false);
+            let bplay=setInterval(function(){
+                let nowhash = new Date()
+                let difftime = (nowhash.getTime() - hashnow.getTime());
+                console.log(difftime)
+                if(difftime/1000>Math.random()*(14)+2){
+                    b.pause();
+                    b.currentTime = 0;
+                    clearInterval(bplay);
+                    spe2.text = "１番線、ドアが閉まります。ご注意ください。"
+                    spe2.lang = "ja-JP"
+                    speechSynthesis.speak(spe2)
+                }
+            },100)
+            spe2.addEventListener("end", function(){
+                speechSynthesis.cancel()
+                d.play();
+            })
             d.addEventListener("ended", function(){ 
                 spe.text = "次は、"+stationh[nowstation]+"、"+stationh[nowstation]+"です。"
                 spe.lang = "ja-JP"
