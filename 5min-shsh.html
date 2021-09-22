@@ -358,20 +358,11 @@
             let d = document.getElementById("door");
             b.play();
             let hashnow = new Date();
-            b.addEventListener("play", function(){
-                let nowhash = new Date()
-                let difftime = (nowhash.getTime() - hashnow.getTime());
-                console.log(difftime)
-                if(difftime/1000>Math.random()*(8)+2){
-                    b.pause();
-                    b.currentTime = 0;
-                }
-            }, false);
             let bplay=setInterval(function(){
                 let nowhash = new Date()
                 let difftime = (nowhash.getTime() - hashnow.getTime());
                 console.log(difftime)
-                if(difftime/1000>Math.random()*(14)+2){
+                if(difftime/1000>Math.random()*(13)+2){
                     b.pause();
                     b.currentTime = 0;
                     clearInterval(bplay);
