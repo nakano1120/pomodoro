@@ -227,8 +227,10 @@
             駅乗車
             <select id="traintype">
                 <option value="各停">各停(1分ごと)</option>
-                <option value="快速">快速(5分ごと)</option>
-                <option value="通快">通快(20分ごと)</option>
+                <option value="快速">快速(3分ごと)</option>
+                <option value="通快">通勤快速(5分ごと)</option>
+                <option value="特快">特別快速(10分ごと)</option>
+                <option value="特急">特急(20分ごと)</option>
             </select>
             <br>
             <br>
@@ -286,16 +288,28 @@
             document.getElementById("study").style.backgroundColor="#7C7D83"
             typestation=1
         }else if(typeindex==1){
+            departuretime = depvalue*3;
+            arrivaltime = arrvalue*3;
+            yetvalue=3
+            document.getElementById("study").style.backgroundColor="#2376B0"
+            typestation=3
+        }else if(typeindex==2){
             departuretime = depvalue*5;
             arrivaltime = arrvalue*5;
             yetvalue=5
-            document.getElementById("study").style.backgroundColor="#2376B0"
+            document.getElementById("study").style.backgroundColor="#60b023"
             typestation=5
+        }else if(typeindex==3){
+            departuretime = depvalue*10;
+            arrivaltime = arrvalue*10;
+            yetvalue=10
+            document.getElementById("study").style.backgroundColor="#e88b43"
+            typestation=10
         }else{
             departuretime = depvalue*20;
             arrivaltime = arrvalue*20;
             yetvalue=20
-            document.getElementById("study").style.backgroundColor="#43BA78"
+            document.getElementById("study").style.backgroundColor="#ed3737"
             typestation=20
         }
         document.getElementById("study").innerText=typevalue;
