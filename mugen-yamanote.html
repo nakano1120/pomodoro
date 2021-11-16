@@ -15,6 +15,7 @@
         text-align:center;
         font-family:sans-serif;
         width:100%;
+
     }
     .main{
         display:inline-block;
@@ -455,6 +456,9 @@
             for(let i=0;i<10;i++){
                 let l=i+1
                 document.getElementById("no"+l).innerHTML=statione[(nowstation+i-1)%30]
+                if(arrvalue<i+nowstation){
+                    document.getElementById("no"+l).innerHTML=""
+                }
             }
         }else{
             document.getElementById("ue").style.fontSize="100%"
@@ -466,11 +470,17 @@
                 }else{
                     document.getElementById("no"+l).style.fontSize="100%"
                 }
+                if(arrvalue<i+nowstation){
+                    document.getElementById("no"+l).innerHTML=""
+                }
             }
         }
         for(let i=0;i<10;i++){
             let l=i+1
             document.getElementById("time"+l).innerHTML=(nowstation*typestation)+(i*typestation)-departuretime-typestation
+            if(arrvalue<i+nowstation){
+                document.getElementById("time"+l).innerHTML=""
+            }
         }
         let realstu=parseInt(stu)+1
     }
