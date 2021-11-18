@@ -77,6 +77,7 @@
     .nextarr{
         position:relative;
         padding-top:3vh;
+        white-space: nowrap;
     }
     #nowstation{   
         font-size:10vw;
@@ -179,7 +180,7 @@
     </style>
 </head>
 <body>
-    <audio id="bell" src="monorail-bell.mp3"></audio>
+    <audio id="bell" src="monorail-bell2.mp3"></audio>
     <audio id="door" src="train-door1.mp3"></audio>
     <div class="space1">
     <table class="nowparts">
@@ -191,7 +192,7 @@
             </td>
             <td id="colors"></td>
             <td class="forst">
-                <h2 class="nextarr"><span id="next">次は</span>　<span id="nowstation">東京</span></h2>
+                <h2 class="nextarr"><span id="next">次は</span><span id="nowstation">東京</span></h2>
             </td>
         </tr>
     </table>
@@ -214,14 +215,30 @@
                 <option value="3">御徒町</option>
                 <option value="4">上野</option>
                 <option value="5">鶯谷</option>
+                <option value="6">日暮里</option>
+                <option value="7">西日暮里</option>
                 <option value="8">田端</option>
+                <option value="9">駒込</option>
                 <option value="10">巣鴨</option>
+                <option value="11">大塚</option>
                 <option value="12">池袋</option>
+                <option value="13">目白</option>
                 <option value="14">高田馬場</option>
+                <option value="15">新大久保</option>
                 <option value="16">新宿</option>
+                <option value="17">代々木</option>
+                <option value="18">原宿</option>
+                <option value="19">渋谷</option>
                 <option value="20">恵比寿</option>
+                <option value="21">目黒</option>
+                <option value="22">五反田</option>
+                <option value="23">大崎</option>
+                <option value="24">品川</option>
                 <option value="25">高輪ゲートウェイ</option>
-                <option value="30">有楽町</option>
+                <option value="26">田町</option>
+                <option value="27">浜松町</option>
+                <option value="28">新橋</option>
+                <option value="29">有楽町</option>
             </select>
             始発
             <input type="number" id="gotostation" min="1" max="120" value="5">
@@ -440,6 +457,8 @@
             document.getElementById("fors").innerHTML="ゆき"
             if(stationh[arrvalue%30].length>5){
                 document.getElementById("nowtimes").style.fontSize="1.8vw"
+            }else if(stationh[arrvalue%30].length>8){
+                document.getElementById("nowtimes").style.fontSize="1.2vw"
             }else{
                 document.getElementById("nowtimes").style.fontSize="3vw"
             }
